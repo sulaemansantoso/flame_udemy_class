@@ -1,13 +1,13 @@
 import 'dart:async';
-import 'dart:developer';
-
-import 'package:flame/components.dart';
 import 'package:flame/game.dart';
+import 'package:flame_udemy_class/component/ship.dart';
 
 class MyFlameGame extends FlameGame {
   @override
   FutureOr<void> onLoad() async {
-    add(SpriteComponent(
-        sprite: await loadSprite("meteor/spaceMeteors_001.png")));
+    Ship s = Ship();
+    add(s);
+
+    //add(SpriteComponent());
   }
 }
