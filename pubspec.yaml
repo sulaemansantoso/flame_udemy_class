@@ -17,4 +17,12 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
+  assets:
+    - assets/images/
+    - assets/images/ships/
+    - assets/images/bullets/
+    - assets/images/explosion/
+    - assets/images/meteor/
+    - assets/images/parallax/
+    - assets/images/items/
   uses-material-design: true
