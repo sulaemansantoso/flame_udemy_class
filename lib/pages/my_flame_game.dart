@@ -1,11 +1,7 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame_udemy_class/component/ship.dart';
-import 'package:flutter/src/services/hardware_keyboard.dart';
-import 'package:flutter/src/services/keyboard_key.g.dart';
-import 'package:flutter/src/widgets/focus_manager.dart';
 
 class MyFlameGame extends FlameGame with PanDetector {
   late Ship s;
@@ -20,7 +16,8 @@ class MyFlameGame extends FlameGame with PanDetector {
 
   @override
   void onPanUpdate(DragUpdateInfo info) {
-    s.position = info.eventPosition.global;
+    s.onPanUpdate(info);
+    // s.position = info.eventPosition.global;
   }
 
   // @override
