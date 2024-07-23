@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:ui';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flame_udemy_class/component/bgParallaxComponent.dart';
 import 'package:flame_udemy_class/component/ship.dart';
 import 'package:flutter/src/services/hardware_keyboard.dart';
 import 'package:flutter/src/services/keyboard_key.g.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/src/widgets/focus_manager.dart';
 
 class MyFlameGame extends FlameGame with PanDetector {
   late Ship s;
+  late Bgparallaxcomponent bgParallax;
 
   @override
   Color backgroundColor() {
@@ -18,10 +20,19 @@ class MyFlameGame extends FlameGame with PanDetector {
 
   @override
   FutureOr<void> onLoad() async {
+    bgParallax = Bgparallaxcomponent();
+    add(bgParallax);
+
     s = Ship();
     add(s);
 
     //add(SpriteComponent());
+  }
+
+  @override
+  void update(double dt) {
+    bgParallax.changeSpeedBasedShip(s);
+    super.update(dt);
   }
 
   @override

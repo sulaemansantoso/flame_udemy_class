@@ -10,11 +10,9 @@ class Ship extends SpriteComponent {
   late Vector2 arah;
   double speed = 3.0;
 
-  @override
-  void onMount() {
+  Ship() {
     arah = Vector2(0, 0);
     tujuan = position;
-    super.onMount();
   }
 
   void setTujuan(DragUpdateInfo info) {
