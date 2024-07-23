@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:ui';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame_udemy_class/component/ship.dart';
@@ -11,6 +12,11 @@ class MyFlameGame extends FlameGame with PanDetector {
   late Ship s;
 
   @override
+  Color backgroundColor() {
+    return const Color(0xFF000045);
+  }
+
+  @override
   FutureOr<void> onLoad() async {
     s = Ship();
     add(s);
@@ -20,7 +26,8 @@ class MyFlameGame extends FlameGame with PanDetector {
 
   @override
   void onPanUpdate(DragUpdateInfo info) {
-    s.position = info.eventPosition.global;
+    s.setTujuan(info);
+    // s.position = info.eventPosition.global;
   }
 
   // @override
