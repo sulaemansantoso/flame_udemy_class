@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:ui';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flame_udemy_class/component/asteroid.dart';
 import 'package:flame_udemy_class/component/bgParallaxComponent.dart';
 import 'package:flame_udemy_class/component/ship.dart';
 import 'package:flutter/src/services/hardware_keyboard.dart';
@@ -22,6 +23,9 @@ class MyFlameGame extends FlameGame with PanDetector {
   FutureOr<void> onLoad() async {
     bgParallax = Bgparallaxcomponent();
     add(bgParallax);
+
+    Asteroid a = Asteroid();
+    add(a);
 
     s = Ship();
     add(s);
