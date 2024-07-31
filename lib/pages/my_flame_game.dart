@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame_udemy_class/component/asteroid.dart';
+import 'package:flame_udemy_class/component/asteroid_spawner.dart';
 import 'package:flame_udemy_class/component/bgParallaxComponent.dart';
 import 'package:flame_udemy_class/component/ship.dart';
 import 'package:flutter/src/services/hardware_keyboard.dart';
@@ -13,6 +14,7 @@ import 'package:flutter/src/widgets/focus_manager.dart';
 class MyFlameGame extends FlameGame with PanDetector {
   late Ship s;
   late Bgparallaxcomponent bgParallax;
+  late AsteroidSpawner asp;
 
   @override
   Color backgroundColor() {
@@ -24,11 +26,11 @@ class MyFlameGame extends FlameGame with PanDetector {
     bgParallax = Bgparallaxcomponent();
     add(bgParallax);
 
-    Asteroid a = Asteroid();
-    add(a);
-
     s = Ship();
     add(s);
+
+    asp = AsteroidSpawner();
+    add(asp);
 
     //add(SpriteComponent());
   }
