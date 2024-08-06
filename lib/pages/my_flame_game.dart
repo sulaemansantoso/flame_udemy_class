@@ -11,7 +11,7 @@ import 'package:flutter/src/services/hardware_keyboard.dart';
 import 'package:flutter/src/services/keyboard_key.g.dart';
 import 'package:flutter/src/widgets/focus_manager.dart';
 
-class MyFlameGame extends FlameGame with PanDetector {
+class MyFlameGame extends FlameGame with PanDetector, TapDetector {
   late Ship s;
   late Bgparallaxcomponent bgParallax;
   late AsteroidSpawner asp;
@@ -45,6 +45,12 @@ class MyFlameGame extends FlameGame with PanDetector {
   void onPanUpdate(DragUpdateInfo info) {
     s.setTujuan(info);
     // s.position = info.eventPosition.global;
+  }
+
+  @override
+  void onTapDown(TapDownInfo info) {
+    s.shoot(info);
+    super.onTapDown(info);
   }
 
   // @override

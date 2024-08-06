@@ -4,8 +4,9 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
+import 'package:flame_udemy_class/component/bullet.dart';
 
-class Ship extends SpriteComponent {
+class Ship extends SpriteComponent with HasGameRef {
   late Vector2 tujuan;
   late Vector2 arah;
   double speed = 3.0;
@@ -13,6 +14,15 @@ class Ship extends SpriteComponent {
   Ship() {
     arah = Vector2(0, 0);
     tujuan = position;
+    priority = 2;
+  }
+
+  void shoot(TapDownInfo info) {
+    bullet bBaru = bullet(position, info);
+    game.add(bBaru);
+
+    lookAt(info.eventPosition.global);
+    angle += pi;
   }
 
   void setTujuan(DragUpdateInfo info) {
