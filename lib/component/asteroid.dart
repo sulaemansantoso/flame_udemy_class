@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame_udemy_class/component/bullet.dart';
 
-class Asteroid extends SpriteComponent with HasGameRef {
+class Asteroid extends SpriteComponent with HasGameRef, CollisionCallbacks {
   double ukuran = 0.5;
   late Vector2 arah;
   late double speed;
@@ -13,8 +15,18 @@ class Asteroid extends SpriteComponent with HasGameRef {
   }
 
   @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    // super.onCollision(intersectionPoints, other);
+    if (other is bullet) {
+      removeFromParent();
+    }
+    print("terjadi tubrukan");
+  }
+
+  @override
   FutureOr<void> onLoad() async {
     sprite = await game.loadSprite('meteor/spaceMeteors_001.png');
+    add(RectangleHitbox(collisionType: CollisionType.passive));
 
     anchor = Anchor.center;
     Random r = new Random();

@@ -10,6 +10,9 @@ class Ship extends SpriteComponent with HasGameRef {
   late Vector2 tujuan;
   late Vector2 arah;
   double speed = 3.0;
+  bool isShooting = false;
+  double shootCooldown = 20;
+  double shootTimer = 0;
 
   Ship() {
     arah = Vector2(0, 0);
@@ -18,9 +21,11 @@ class Ship extends SpriteComponent with HasGameRef {
   }
 
   void shoot(TapDownInfo info) {
-    bullet bBaru = bullet(position, info);
-    game.add(bBaru);
-
+    if (isShooting == false) {
+      bullet bBaru = bullet(position, info);
+      game.add(bBaru);
+      isShooting = true;
+    }
     lookAt(info.eventPosition.global);
     angle += pi;
   }
@@ -44,6 +49,13 @@ class Ship extends SpriteComponent with HasGameRef {
 
   @override
   void update(double dt) {
+    if (isShooting == true) {
+      shootTimer++;
+      if (shootTimer > shootCooldown) {
+        shootTimer = 0;
+        isShooting = false;
+      }
+    }
     if ((tujuan - position).length < speed) {
       position = tujuan;
       arah = Vector2(0, 0);

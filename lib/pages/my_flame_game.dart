@@ -11,7 +11,8 @@ import 'package:flutter/src/services/hardware_keyboard.dart';
 import 'package:flutter/src/services/keyboard_key.g.dart';
 import 'package:flutter/src/widgets/focus_manager.dart';
 
-class MyFlameGame extends FlameGame with PanDetector, TapDetector {
+class MyFlameGame extends FlameGame
+    with PanDetector, TapDetector, HasCollisionDetection {
   late Ship s;
   late Bgparallaxcomponent bgParallax;
   late AsteroidSpawner asp;
