@@ -1,18 +1,36 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:ui';
 
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
+import 'package:flame/rendering.dart';
 import 'package:flame_udemy_class/component/bullet.dart';
 
-class Ship extends SpriteComponent with HasGameRef {
+class Ship extends SpriteComponent with HasGameRef, CollisionCallbacks {
   late Vector2 tujuan;
   late Vector2 arah;
   double speed = 3.0;
   bool isShooting = false;
+  bool isBeingHit = false;
+  double hitTimer = 0;
+  double hitCooldown = 10;
   double shootCooldown = 20;
   double shootTimer = 0;
+
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    if ((isBeingHit == false) && (other is! bullet)) {
+      isBeingHit = true;
+      decorator
+          .addLast(PaintDecorator.tint(const Color.fromARGB(255, 255, 0, 0)));
+      decorator.addLast(PaintDecorator.blur(10));
+    }
+
+    super.onCollision(intersectionPoints, other);
+  }
 
   Ship() {
     arah = Vector2(0, 0);
@@ -45,6 +63,8 @@ class Ship extends SpriteComponent with HasGameRef {
     position = Vector2(150, 150);
     angle = -pi / 2;
     anchor = Anchor.center;
+    add(CircleHitbox(
+        radius: sprite!.image.width / 2, collisionType: CollisionType.active));
   }
 
   @override
@@ -54,6 +74,15 @@ class Ship extends SpriteComponent with HasGameRef {
       if (shootTimer > shootCooldown) {
         shootTimer = 0;
         isShooting = false;
+      }
+    }
+    if (isBeingHit) {
+      hitTimer++;
+      if (hitTimer > hitCooldown) {
+        hitTimer = 0;
+        isBeingHit = false;
+        decorator.removeLast();
+        decorator.removeLast();
       }
     }
     if ((tujuan - position).length < speed) {
