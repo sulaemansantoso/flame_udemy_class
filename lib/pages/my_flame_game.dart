@@ -7,6 +7,8 @@ import 'package:flame_udemy_class/component/asteroid.dart';
 import 'package:flame_udemy_class/component/asteroid_spawner.dart';
 import 'package:flame_udemy_class/component/bgParallaxComponent.dart';
 import 'package:flame_udemy_class/component/ship.dart';
+import 'package:flame_udemy_class/ui/game_data.dart';
+import 'package:flame_udemy_class/ui/score_text.dart';
 import 'package:flutter/src/services/hardware_keyboard.dart';
 import 'package:flutter/src/services/keyboard_key.g.dart';
 import 'package:flutter/src/widgets/focus_manager.dart';
@@ -16,6 +18,12 @@ class MyFlameGame extends FlameGame
   late Ship s;
   late Bgparallaxcomponent bgParallax;
   late AsteroidSpawner asp;
+  late GameData data;
+  late ScoreText scoreText;
+
+  void addScore(int score) {
+    data.addScore(score);
+  }
 
   @override
   Color backgroundColor() {
@@ -24,6 +32,7 @@ class MyFlameGame extends FlameGame
 
   @override
   FutureOr<void> onLoad() async {
+    data = GameData(0, 3);
     bgParallax = Bgparallaxcomponent();
     add(bgParallax);
 
@@ -33,6 +42,8 @@ class MyFlameGame extends FlameGame
     asp = AsteroidSpawner();
     add(asp);
 
+    scoreText = ScoreText(data);
+    add(scoreText);
     //add(SpriteComponent());
   }
 

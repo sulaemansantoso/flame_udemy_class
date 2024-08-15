@@ -3,9 +3,12 @@ import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame_udemy_class/component/blast_particle.dart';
 import 'package:flame_udemy_class/component/bullet.dart';
+import 'package:flame_udemy_class/pages/my_flame_game.dart';
 
-class Asteroid extends SpriteComponent with HasGameRef, CollisionCallbacks {
+class Asteroid extends SpriteComponent
+    with HasGameRef<MyFlameGame>, CollisionCallbacks {
   double ukuran = 0.5;
   late Vector2 arah;
   late double speed;
@@ -18,9 +21,12 @@ class Asteroid extends SpriteComponent with HasGameRef, CollisionCallbacks {
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     // super.onCollision(intersectionPoints, other);
     if (other is bullet) {
+      game.add(BlastParticle(position, ukuran));
+      game.addScore(10);
       removeFromParent();
     }
     print("terjadi tubrukan");
+    super.onCollision(intersectionPoints, other);
   }
 
   @override

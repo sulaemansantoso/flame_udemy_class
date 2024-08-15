@@ -38,9 +38,9 @@ class bullet extends SpriteComponent with HasGameRef, CollisionCallbacks {
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     // TODO: implement onCollision
-    // super.onCollision(intersectionPoints, other);
     if (other is Asteroid) {
       removeFromParent();
     }
+    super.onCollision(intersectionPoints, other);
   }
 }
