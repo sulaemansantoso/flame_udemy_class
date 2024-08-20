@@ -10,6 +10,7 @@ import 'package:flame_udemy_class/component/ship.dart';
 import 'package:flame_udemy_class/ui/game_data.dart';
 import 'package:flame_udemy_class/ui/lives_ui.dart';
 import 'package:flame_udemy_class/ui/score_text.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/src/services/hardware_keyboard.dart';
 import 'package:flutter/src/services/keyboard_key.g.dart';
 import 'package:flutter/src/widgets/focus_manager.dart';
@@ -23,6 +24,14 @@ class MyFlameGame extends FlameGame
   late ScoreText scoreText;
   late LivesUI liveUI;
 
+  void reset() {
+    resumeEngine();
+    overlays.remove("GameOver");
+    data = GameData(0, 3);
+    liveUI.reset(data);
+    scoreText.reset(data);
+  }
+
   void addScore(int score) {
     data.addScore(score);
   }
@@ -31,6 +40,8 @@ class MyFlameGame extends FlameGame
     data.loseLife();
     liveUI.loseLife();
     if (data.lives <= 0) {
+      pauseEngine();
+      overlays.add("GameOver");
       // gameover
     }
   }
@@ -57,6 +68,7 @@ class MyFlameGame extends FlameGame
 
     liveUI = LivesUI(data);
     add(liveUI);
+
     //add(SpriteComponent());
   }
 
