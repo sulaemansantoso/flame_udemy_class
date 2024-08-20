@@ -22,6 +22,16 @@ class LivesUI extends PositionComponent with HasGameRef {
     return super.onLoad();
   }
 
+  void reset(GameData data) {
+    gameData = data;
+    for (int i = 0; i < gameData.lives; i++) {
+      lives.add(LivesUiComponent());
+      lives[i].position =
+          Vector2(game.size.x - (i * (lives[i].width + 50) + 50), 30);
+      game.camera.viewport.add(lives[i]);
+    }
+  }
+
   void loseLife() {
     if (lives.isNotEmpty) {
       lives[lives.length - 1].removeFromParent();

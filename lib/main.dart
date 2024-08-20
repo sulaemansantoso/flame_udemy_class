@@ -1,4 +1,5 @@
 import 'package:flame/game.dart';
+import 'package:flame_udemy_class/pages/game_over_overlay.dart';
 import 'package:flame_udemy_class/pages/my_flame_game.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,11 @@ class MainApp extends StatelessWidget {
     return Material(
         child: GameWidget(
       game: MyFlameGame(),
+      overlayBuilderMap: {
+        "GameOver": (context, MyFlameGame game) {
+          return GameOverOverlay(game);
+        }
+      },
     ));
   }
 }
