@@ -8,6 +8,7 @@ import 'package:flame_udemy_class/component/asteroid_spawner.dart';
 import 'package:flame_udemy_class/component/bgParallaxComponent.dart';
 import 'package:flame_udemy_class/component/ship.dart';
 import 'package:flame_udemy_class/ui/game_data.dart';
+import 'package:flame_udemy_class/ui/lives_ui.dart';
 import 'package:flame_udemy_class/ui/score_text.dart';
 import 'package:flutter/src/services/hardware_keyboard.dart';
 import 'package:flutter/src/services/keyboard_key.g.dart';
@@ -20,9 +21,18 @@ class MyFlameGame extends FlameGame
   late AsteroidSpawner asp;
   late GameData data;
   late ScoreText scoreText;
+  late LivesUI liveUI;
 
   void addScore(int score) {
     data.addScore(score);
+  }
+
+  void loseLife() {
+    data.loseLife();
+    liveUI.loseLife();
+    if (data.lives <= 0) {
+      // gameover
+    }
   }
 
   @override
@@ -44,6 +54,9 @@ class MyFlameGame extends FlameGame
 
     scoreText = ScoreText(data);
     add(scoreText);
+
+    liveUI = LivesUI(data);
+    add(liveUI);
     //add(SpriteComponent());
   }
 
