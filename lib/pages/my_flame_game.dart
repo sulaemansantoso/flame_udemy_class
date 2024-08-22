@@ -69,6 +69,7 @@ class MyFlameGame extends FlameGame
     liveUI = LivesUI(data);
     add(liveUI);
 
+    pauseEngine();
     //add(SpriteComponent());
   }
 

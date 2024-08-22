@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flame_udemy_class/pages/game_over_overlay.dart';
 import 'package:flame_udemy_class/pages/my_flame_game.dart';
+import 'package:flame_udemy_class/pages/start_menu_overlay.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,8 +19,12 @@ class MainApp extends StatelessWidget {
       overlayBuilderMap: {
         "GameOver": (context, MyFlameGame game) {
           return GameOverOverlay(game);
+        },
+        "StartMenu": (context, MyFlameGame game) {
+          return StartMenuOverlay(game);
         }
       },
+      initialActiveOverlays: const ["StartMenu"],
     ));
   }
 }
