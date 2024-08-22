@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   flame: ^1.17.0
+  flame_audio: ^2.10.2
   flutter:
     sdk: flutter
 
@@ -18,6 +19,7 @@ dev_dependencies:
 
 flutter:
   assets:
+    - assets/audio/
     - assets/images/
     - assets/images/ships/
     - assets/images/bullets/

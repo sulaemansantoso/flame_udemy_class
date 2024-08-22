@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_udemy_class/component/blast_particle.dart';
 import 'package:flame_udemy_class/component/bullet.dart';
 import 'package:flame_udemy_class/component/ship.dart';
@@ -24,6 +25,7 @@ class Asteroid extends SpriteComponent
     if ((other is bullet) || (other is Ship)) {
       game.add(BlastParticle(position, ukuran));
       game.addScore(10);
+      FlameAudio.play("EXPLDsgn_Explosion Impact_14.wav");
       removeFromParent();
     }
     print("terjadi tubrukan");

@@ -1,3 +1,4 @@
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_udemy_class/pages/my_flame_game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -42,5 +43,6 @@ class StartMenuOverlay extends StatelessWidget {
   void onPressed() {
     game.resumeEngine();
     game.overlays.remove("StartMenu");
+    FlameAudio.bgm.play("Looping Ascent - Joel Cummins.mp3");
   }
 }

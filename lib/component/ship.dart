@@ -7,6 +7,7 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/rendering.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_udemy_class/component/bullet.dart';
 import 'package:flame_udemy_class/component/explosion.dart';
 import 'package:flame_udemy_class/pages/my_flame_game.dart';
@@ -32,6 +33,7 @@ class Ship extends SpriteComponent
       decorator.addLast(PaintDecorator.blur(10));
       game.loseLife();
       game.add(Explosion(intersectionPoints.first, Vector2(1, 1)));
+      FlameAudio.play("EXPLDsgn_Explosion Impact_14.wav");
     }
 
     super.onCollision(intersectionPoints, other);
@@ -48,6 +50,7 @@ class Ship extends SpriteComponent
       bullet bBaru = bullet(position, info);
       game.add(bBaru);
       isShooting = true;
+      FlameAudio.play("GUNArtl_Grenade Launcher Fire_05.wav");
     }
     lookAt(info.eventPosition.global);
     angle += pi;
